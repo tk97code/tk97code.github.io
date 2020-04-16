@@ -1,10 +1,10 @@
 const socket = io('https://videochat0101.herokuapp.com/');
 
-// $('#div-chat').hide();
+$('#div-chat').hide();
 
 socket.on('ONLINE_LIST', arrUserInfo => {
-    // $('#div-chat').show();
-    // $('#div-rigister').hide();
+    $('#div-chat').show();
+    $('#div-rigister').hide();
 
     arrUserInfo.forEach(user => {
         const { ten, peerID } = user;
@@ -24,12 +24,12 @@ socket.on('ONLINE_LIST', arrUserInfo => {
 socket.on('RIGISTER_FAIL', () => alert('Plaese choose other username'));
 
 function openStream() {
-    // const config = { audio: true, video: true };
-    // return navigator.mediaDevices.getUserMedia(config);
-    var constrains = {
-        video: { facingmode: 'user'}
-    }
-    return navigator.mediaDevices.getUserMedia(constrains);
+    const config = { audio: true, video: true };
+    return navigator.mediaDevices.getUserMedia(config);
+    // var constrains = {
+    //     video: { facingmode: 'user'}
+    // }
+    // return navigator.mediaDevices.getUserMedia(constrains);
 }
 
 function playStream(idVideoTag, stream) {
