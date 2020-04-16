@@ -1,6 +1,6 @@
 const socket = io('https://videochat0101.herokuapp.com/');
 
-$('#div-chat').hide();
+$('#div-chat').show();
 
 socket.on('ONLINE_LIST', arrUserInfo => {
     $('#div-chat').show();
