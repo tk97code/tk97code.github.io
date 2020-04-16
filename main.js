@@ -4,7 +4,7 @@ $('#div-chat').hide();
 
 let customConfig;
 
-$ajax({
+$.ajax({
     url: "https://service.xirsys.com/ice",
     data: {
         ident: "tk97code",
