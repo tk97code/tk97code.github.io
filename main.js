@@ -42,6 +42,8 @@ socket.on('ONLINE_LIST', arrUserInfo => {
     socket.on('SOMEONE_DISCONNECT', peerID => {
         $(`#${peerID}`).remove();
         $('#call').remove();
+        $('#remoteStream').remove();
+        $('#remoteCam').append('<video id="remoteStream" width="300px" controls></video>');
     });
 });
 
