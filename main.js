@@ -27,16 +27,21 @@ socket.on('ONLINE_LIST', arrUserInfo => {
 
     arrUserInfo.forEach(user => {
         const { ten, peerID } = user;
-        $('#listUser').append(`<li id="${peerID}">${ten}</li>`);
+        $('#listUser').append(
+            `<div id="${peerID}"><li id="${peerID}">${ten}</li><button id="${peerID}">Call</button></div>`
+        );
     });
 
     socket.on('HAVE_NEW_USER', user => {
         const { ten, peerID } = user;
-        $('#listUser').append(`<li id="${peerID}">${ten}</li>`);
+        $('#listUser').append(
+            `<div id="${peerID}"><li id="${peerID}">${ten}</li><button id="${peerID}">Call</button></div>`
+        );
     });
 
     socket.on('SOMEONE_DISCONNECT', peerID => {
         $(`#${peerID}`).remove();
+        $('#call').remove();
     });
 });
 
@@ -70,8 +75,17 @@ const peer = new Peer({
 
 peer.on('open', id => {
     $('#btnSignUp').click(() => {
-        const username = $('#txtUsername').val();
-        socket.emit('REGISTER', { ten: username, peerID: id });
+        var checkName = document.getElementById('txtUsername').value;
+        if (checkName.length == 1 || checkName.length == 2 || checkName.length == 3) {
+            alert('The name must be at least 4 characters');
+        }
+        else if (checkName.length == 0) {
+            alert('Please enter a name');
+        }
+        else {
+            const username = $('#txtUsername').val();
+            socket.emit('REGISTER', { ten: username, peerID: id });
+        }
     });
     $('#myPeer').append(id)
 });
@@ -98,7 +112,7 @@ peer.on('call', call => {
     });
 });
 
-$('#listUser').on('click', 'li', function() {
+$('#listUser').on('click', 'button', function() {
     const id = $(this).attr('id');
     openStream()
     .then(stream => {

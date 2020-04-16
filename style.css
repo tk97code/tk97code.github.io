@@ -1,0 +1,15 @@
+#listUser > div {
+    width: 90px;
+    margin-top: 10px;
+}
+
+#listUser > div > button {
+    display: block;
+    margin-left: 85px;
+    margin-top: -20px;
+}
+
+#alertSpace {
+    color: red;
+    transition: 0.5s;
+}
