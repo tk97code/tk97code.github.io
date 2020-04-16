@@ -24,8 +24,12 @@ socket.on('ONLINE_LIST', arrUserInfo => {
 socket.on('RIGISTER_FAIL', () => alert('Plaese choose other username'));
 
 function openStream() {
-    const config = { audio: true, video: true };
-    return navigator.mediaDevices.getUserMedia(config);
+    // const config = { audio: true, video: true };
+    // return navigator.mediaDevices.getUserMedia(config);
+    var constrains = {
+        video: { facingmode: 'user'}
+    }
+    return navigator.mediaDevices.getUserMedia(constrains);
 }
 
 function playStream(idVideoTag, stream) {
