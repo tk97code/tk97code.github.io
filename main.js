@@ -2,6 +2,25 @@ const socket = io('https://videochat0101.herokuapp.com/');
 
 $('#div-chat').hide();
 
+let customConfig;
+
+$ajax({
+    url: "https://service.xirsys.com/ice",
+    data: {
+        ident: "tk97code",
+        secret: "5d409206-7f8b-11ea-9280-0242ac110004",
+        domain: "tk97code.github.io",
+        application: "default",
+        room: "default",
+        secure: 1
+    },
+    success: function (data, status) {
+        customConfig = data.d;
+        console.log(customConfig);
+    },
+    asyn: false
+});
+
 socket.on('ONLINE_LIST', arrUserInfo => {
     $('#div-chat').show();
     $('#div-rigister').hide();
@@ -41,7 +60,13 @@ function playStream(idVideoTag, stream) {
 // openStream()
 // .then(stream => playStream('localStream', stream));
 
-const peer = new Peer({ key: 'peerjs', host: 'newpeersever.herokuapp.com', secure: true, port: 443 }); 
+const peer = new Peer({ 
+    key: 'peerjs', 
+    host: 'newpeersever.herokuapp.com', 
+    secure: true, 
+    port: 443, 
+    config: customConfig 
+}); 
 
 peer.on('open', id => {
     $('#btnSignUp').click(() => {
