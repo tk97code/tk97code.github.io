@@ -40,11 +40,11 @@ function playStream(idVideoTag, stream) {
 var peer = new Peer(); 
 
 peer.on('open', id => {
-    $('#myPeer').append(id)
     $('#btnSignUp').click(() => {
         const username = $('#txtUsername').val();
         socket.emit('REGISTER', { ten: username, peerID: id });
     });
+    $('#myPeer').append(id)
 });
 
 // Caller
