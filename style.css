@@ -2,6 +2,7 @@
     color: azure;
     text-shadow: 2px 2px 6px white;
     font-size: 20px;
+    text-align: center;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
@@ -12,6 +13,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
 .loader {
