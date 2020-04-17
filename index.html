@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Video Chat</title>
     <script src="peer.js"></script>
-    <script src="jquery.js"></script>    
+    <script src="jquery.js"></script>
     <script src="socket.io.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+
+<body style="padding: 0; margin: 0; overflow: hidden;">
+
+    <div class="loadingAnimation">
+        <div class="loader">
+            <div class="face">
+                <div class="circle"></div>
+            </div>
+            <div class="face">
+                <div class="circle"></div>
+            </div>
+            <p class="loading-p">Loading...</p>
+        </div>
+    </div>
+
     <div id="div-chat">
         <p>ONLINE USERS: </p>
         <ul id="listUser"></ul>
@@ -21,13 +36,16 @@
         <input type="text" id="remoteID" placeholder="Enter remote ID">
         <button id="btnCall">Call With ID</button>
     </div>
+
     <div id="div-rigister">
         <br> <br>
-        <input type="text" id="txtUsername" placeholder="Enter your username" minlength="4" maxlength="10">
+        <input type="text" id="txtUsername" placeholder="Enter your username" minlength="4" maxlength="12">
         <button id="btnSignUp">Sign Up</button>
-        <p id="alertSpace">Don't use space in name</p>
+        <p id="alertSpace">Don't use special characters in name</p>
     </div>
 </body>
+<script src="animation.js"></script>
 <script src="main.js"></script>
 <script src="function.js"></script>
+
 </html>
