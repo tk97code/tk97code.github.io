@@ -2,8 +2,7 @@
     color: azure;
     text-shadow: 2px 2px 6px white;
     font-size: 20px;
-    text-align: center;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .loadingAnimation {
@@ -89,7 +88,7 @@
 
 #listUser>div>button {
     display: block;
-    margin-left: 85px;
+    margin-left: 95px;
     margin-top: -20px;
 }
 

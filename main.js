@@ -22,26 +22,27 @@ $.ajax({
 });
 
 socket.on('ONLINE_LIST', arrUserInfo => {
-    $('#div-chat').fadeIn('slow');
+    $('#div-chat').show('slow');
     $('#div-rigister').fadeOut('slow');
 
     arrUserInfo.forEach(user => {
         const { ten, peerID } = user;
         $('#listUser').append(
-            `<div id="${peerID}"><li id="${peerID}">${ten}</li><button id="btn${peerID}">Call</button></div>`
+            `<div id="${peerID}"><li id="${peerID}">${ten}</li><button id="${peerID}">Call</button></div>`
         );
     });
 
     socket.on('HAVE_NEW_USER', user => {
         const { ten, peerID } = user;
         $('#listUser').append(
-            `<div id="${peerID}"><li id="${peerID}">${ten}</li><button id="btn${peerID}">Call</button></div>`
+            `<div id="${peerID}"><li id="${peerID}">${ten}</li><button id="${peerID}">Call</button></div>`
         );
     });
 
     socket.on('SOMEONE_DISCONNECT', peerID => {
-        $(`#${peerID}`).remove();
-        $('#call').remove();
+        $(`#${peerID}`).fadeOut('slow', function() {
+            $(this).remove();
+        });
         $('#remoteStream').remove();
         $('#remoteCam').append('<video id="remoteStream" width="300px" controls></video>');
     });
@@ -52,16 +53,17 @@ socket.on('RIGISTER_FAIL', () => alert('Plaese choose other username'));
 function openStream() {
     const config = { audio: true, video: true };
     return navigator.mediaDevices.getUserMedia(config);
-    // var constrains = {
-    //     video: { facingmode: 'user'}
-    // }
-    // return navigator.mediaDevices.getUserMedia(constrains);
 }
 
 function playStream(idVideoTag, stream) {
     const video = document.getElementById(idVideoTag);
     video.srcObject = stream;
-    video.play();
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+        playPromise.then(() => {
+            return video.play();
+        });
+    }
 }
 
 // openStream()
@@ -114,7 +116,7 @@ peer.on('call', call => {
 });
 
 $('#listUser').on('click', 'button', function() {
-    const id = $(this).attr('id');
+    const id = $('id').attr('id');
     openStream()
         .then(stream => {
             playStream('localStream', stream);
