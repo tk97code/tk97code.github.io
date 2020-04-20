@@ -58,12 +58,7 @@ function openStream() {
 function playStream(idVideoTag, stream) {
     const video = document.getElementById(idVideoTag);
     video.srcObject = stream;
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-        playPromise.then(() => {
-            return video.play();
-        });
-    }
+    video.play();
 }
 
 // openStream()
@@ -116,11 +111,12 @@ peer.on('call', call => {
 });
 
 $('#listUser').on('click', 'button', function() {
-    const id = $('id').attr('id');
+    const id = $('button').attr('id');
     openStream()
         .then(stream => {
             playStream('localStream', stream);
             const call = peer.call(id, stream);
             call.on('stream', remoteStream => playStream('remoteStream', remoteStream));
+            console.log('called');
         });
 });
